@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+        <mapper namespace="com.oy.dao.BlogMapper">
+        	<resultMap type="Blog" id="blogResultMap">
+        		<id property="blogid" column="blogid"/>
+        		<result property="blogtitle" column="blogtitle"/>
+        		<result property="article" column="article"/>
+        		<result property="time" column="time"/>  
+        	</resultMap>
+        	
+        	<select id="listBlog" parameterType="Blog" resultMap="blogResultMap">
+        		select * from blog_tb         			        	      	
+        	</select>
+        	<select id="findById" parameterType="Blog" resultMap="blogResultMap">
+        		select * from blog_tb where blogid=#{blogid}        	
+        	</select>
+        	<insert id="addBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="blogid">
+        		insert into blog_tb (blogtitle,article,time)values(#{blogtitle},#{article},#{time})
+        
+        	</insert>
+        	<delete id="deleteBlog" parameterType="int">
+        		delete from blog_tb where blogid=#{blogid}
+        	</delete>               
+        </mapper>
